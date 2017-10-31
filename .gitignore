@@ -6,8 +6,9 @@ node_modules
 # testing
 /coverage
 
-# production
+# production + css files (build artifacts)
 /build
+/src/**/*.css
 
 # misc
 .DS_Store
