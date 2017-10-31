@@ -1,34 +1,44 @@
+// vendor imports
 import * as React from 'react';
-import { Route } from 'react-router-dom';
+const reactRouter = require('react-router-dom');
+let { Route } = reactRouter;
 import { createStore, combineReducers, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
-import createHistory from 'history/createBrowserHistory';
-import { ConnectedRouter, routerReducer, routerMiddleware, push } from 'react-router-redux';
+const createHistory = require('history').createBrowserHistory;
+const rdx = require('react-router-redux');
+let { ConnectedRouter, routerReducer, routerMiddleware } = rdx;
 
-import Dashboard from './Dashboard/Dashboard';
+// client imports
+import Dashboard from './components/Dashboard/Dashboard';
+import { baseReducer } from './reducers';
 import './App.css';
 
-const history: any = createHistory();
+// redux setup
+const history = createHistory();
 const middleware = routerMiddleware(history);
+const store = createStore(
+    combineReducers({
+        baseReducer,
+        router: routerReducer
+    }),
+    applyMiddleware(middleware));
 
-const logo = require('./logo.svg');
-
-class App extends React.Component {
+export default class App extends React.Component {
     render() {
         return (
-            <Router>
-                <div className="App">
+            <Provider store={store}>
+                <ConnectedRouter history={history}>
 
-                    <div className="App-header">
-                        <img src={logo} className="App-logo" alt="logo" />
-                        <h2>Welcome to React</h2>
+                    <div className="App">
+                        <div className="App-header">
+                            <h2>poolranking</h2>
+                            <h4>team robotosaurus xxxl 9000 pro</h4>
+                        </div>
+                        <Route path={'/'} component={Dashboard} />
                     </div>
-                    <Route path={'/'} component={Dashboard} />
 
-                </div>
-            </Router>
+                </ConnectedRouter>
+            </Provider>
         );
     }
 }
-
-export default App;
