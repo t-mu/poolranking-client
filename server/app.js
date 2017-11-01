@@ -1,14 +1,12 @@
+const path = require('path');
 const express = require('express');
 const app = express();
 
-app.use(express.static('../build'));
+app.use(express.static(path.resolve(__dirname, '../', 'build')));
 
+const indexFilePath = path.resolve(__dirname, '../', 'build', 'index.html');
 app.get('/*', (req, res) => {
-    res.sendFile('../build/index.html');
+    res.sendFile(indexFilePath);
 });
 
 module.exports = app;
-
-if (require.main === module) {
-    app.listen(3000, () => console.log("App running on port 3000"));
-}
