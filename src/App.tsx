@@ -9,32 +9,34 @@ const rdx = require('react-router-redux');
 let { ConnectedRouter, routerReducer, routerMiddleware } = rdx;
 
 // client imports
-import Dashboard from './components/Dashboard/Dashboard';
-import { baseReducer } from './reducers';
+import DashboardContainer from './containers/DashboardContainer';
+// import { baseReducer } from './reducers';
 import './App.css';
 
 // redux setup
+import playersReducer from "./reducers/playersReducer";
 const history = createHistory();
 const middleware = routerMiddleware(history);
 const store = createStore(
     combineReducers({
-        baseReducer,
+        players: playersReducer,
         router: routerReducer
     }),
     applyMiddleware(middleware));
 
 export default class App extends React.Component {
+
     render() {
+
         return (
             <Provider store={store}>
                 <ConnectedRouter history={history}>
 
                     <div className="App">
-                        <div className="App-header">
-                            <h2>poolranking</h2>
-                            <h4>team robotosaurus xxxl 9000 pro</h4>
-                        </div>
-                        <Route path={'/'} component={Dashboard} />
+                        <header className="app__header">
+                            <h1>Master class billiard ranking</h1>
+                        </header>
+                        <Route path={'/'} component={DashboardContainer} />
                     </div>
 
                 </ConnectedRouter>
