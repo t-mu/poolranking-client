@@ -10,6 +10,9 @@ let { ConnectedRouter, routerReducer, routerMiddleware } = rdx;
 
 // client imports
 import DashboardContainer from './containers/DashboardContainer';
+import MatchList from "./components/MatchList/MatchList";
+import Navigation from "./components/Navigation/Navigation";
+import PlayerList from "./components/PlayerList/PlayerList";
 import './App.css';
 
 // redux setup
@@ -31,11 +34,14 @@ export default class App extends React.Component {
             <Provider store={store}>
                 <ConnectedRouter history={history}>
 
-                    <div className="App container">
-                        <header>
-                            <h1>Master class billiard ranking</h1>
-                        </header>
-                        <Route path={'/'} component={DashboardContainer} />
+                    <div className="App">
+                    <header>
+                        <h1>Pool ranking</h1>
+                        <Navigation />
+                    </header>
+                        <Route exact path={'/'} component={DashboardContainer} />
+                        <Route exact path={'/matches'} component={MatchList} />
+                        <Route exact path={'/players'} component={PlayerList} />
                     </div>
 
                 </ConnectedRouter>
