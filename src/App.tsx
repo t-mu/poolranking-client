@@ -13,6 +13,7 @@ import DashboardContainer from './containers/DashboardContainer';
 import MatchList from "./components/MatchList/MatchList";
 import Navigation from "./components/Navigation/Navigation";
 import PlayerList from "./components/PlayerList/PlayerList";
+import AddMatch from "./components/AddMatch/AddMatch";
 import './App.css';
 
 // redux setup
@@ -35,6 +36,7 @@ export default class App extends React.Component {
                     </header>
                         <Route exact path={'/'} component={DashboardContainer} />
                         <Route exact path={'/matches'} component={MatchList} />
+                        <Route exact path={'/matches/new'} component={AddMatch} />
                         <Route exact path={'/players'} component={PlayerList} />
                     </div>
 
