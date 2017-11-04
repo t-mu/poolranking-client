@@ -2,29 +2,41 @@ import axios from 'axios';
 import { AxiosResponse } from 'axios';
 
 import { Player } from './models/player';
+import { ScoreboardPlayer } from './models/scoreboardPlayer';
 
 export default class ApiService
 {
-    private endpoints: Endpoints;
-    private baseUrl: string;
+    private endpoints: Promise<Endpoints>;
 
     constructor()
     {
-        axios.get<Endpoints>('/endpoints')
+        this.endpoints = axios.get<Endpoints>('/endpoints')
             .then((response: AxiosResponse<Endpoints>) =>
-            {
-                this.endpoints = response.data;
-                this.baseUrl = this.endpoints.apiGatewayHost + ':' + this.endpoints.apiGatewayPort;
-            });
-    }
-
-    public getPlayers(): Promise<Player[]>
-    {
-        return axios.get<Player[]>(this.baseUrl + '/api/players')
-            .then((response: AxiosResponse<Player[]>) =>
             {
                 return response.data;
             });
+    }
+
+    public async getBaseUrl(): Promise<string>
+    {
+        const endpoints = await this.endpoints;
+        const baseUrl = endpoints.apiGatewayHost + ':' + endpoints.apiGatewayPort;
+        return baseUrl;
+    }
+
+    public async getPlayers(): Promise<Player[]>
+    {
+        const baseUrl = await this.getBaseUrl();
+        const response = await axios.get<Player[]>(baseUrl + '/api/players');
+        return response.data;
+    }
+
+    public async getScoreboard(): Promise<ScoreboardPlayer[]>
+    {
+        const baseUrl = await this.getBaseUrl();
+        const response = await axios.get<ScoreboardPlayer[]>(baseUrl + '/api/scoreboard');
+        return response.data;
+
     }
 }
 
