@@ -1,7 +1,9 @@
 // vendor imports
 import * as React from 'react';
+import ApiService from '../../apiService';
+import { ScoreboardPlayer } from '../../models/scoreboardPlayer';
 
-// componetn imports
+// component imports
 import './Dashboard.css';
 
 
@@ -11,74 +13,24 @@ interface Props
     createPlayer: Function;
 }
 
-interface Player
-{
-    score: string;
-    name: string;
-    wins: string;
-    loses: string;
-}
-
 class Dashboard extends React.Component<Props> {
 
-    // public userName: string = "";
-    public players: Player[] = [];
+    public players: ScoreboardPlayer[] = [];
     public loading = true;
 
     public async componentDidMount()
     {
-        // const response = await axios.get('http://lthackathon2017api.westeurope.cloudapp.azure.com:3333/api/players');
-        // mock data
-        const response = {
-            data: [
-                {
-                    score: "0",
-                    name: "Anssi",
-                    wins: "0",
-                    loses: "2"
-                },
-                {
-                    score: "2",
-                    name: "Teemu",
-                    wins: "2",
-                    loses: "6"
-                },
-                {
-                    score: "2",
-                    name: "Johannes",
-                    wins: "5",
-                    loses: "1"
-                }
-            ]
-        };
-        this.players = response.data;
+        let api = new ApiService();
+        this.players = await api.getScoreboard();
         this.loading = false;
         this.forceUpdate();
     }
 
-    // public updateUserName(e: any): void
-    // {
-    //     this.userName = e.target.value;
-    // }
-
-    // public createPlayer()
-    // {
-    //     if (this.userName && this.userName.trim() !== "")
-    //     {
-    //         this.props.createPlayer(this.userName);
-    //     }
-    // }
-
     render() {
         return (
-            <div className="Dashboard container">
-                <h1>Scoreboard</h1>
-                {/* <div>
-                    <input type="text" onChange={this.updateUserName.bind(this)}/>
-                    <button onClick={this.createPlayer.bind(this)}>Add player</button>
-                </div> */}
+            <div className="Dashboard">
                 {this.loading ? <p>loading</p> :
-                    <table className="table container">
+                    <table className="table container is-bordered is-striped">
                         <thead>
                             <tr>
                                 <th>Score</th>
@@ -98,14 +50,14 @@ class Dashboard extends React.Component<Props> {
                             </tr>
                         </tfoot>
                         <tbody>
-                        {this.players.map((player, index) => {
+                        {this.players.map((player) => {
                             return (
-                                <tr key={index}>
-                                    <th>{player.score}</th>
-                                    <th>{player.name}</th>
+                                <tr key={player.playerId}>
+                                    <th>{player.rating}</th>
+                                    <th>{player.playerName}</th>
                                     <th>{player.wins}</th>
-                                    <th>{player.loses}</th>
-                                    <th>{parseInt(player.wins, 10) / parseInt(player.loses, 10)}</th>
+                                    <th>{player.losses}</th>
+                                    <th>{parseInt(player.wins, 10) / parseInt(player.losses, 10)}</th>
                                 </tr>
                             )
                         })}
