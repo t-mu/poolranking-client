@@ -1,23 +1,37 @@
+// vendor imports
 import * as React from 'react';
+import * as axios from 'axios';
+
+// component imports
 import './PlayerList.css';
 import Player from "../Player/Player";
 
 
-class PlayerList extends React.Component {
+interface Props
+{
+    players: any[];
+}
 
-    constructor(public props: any)
+class PlayerList extends React.Component<Props>
+{
+    constructor(props: any)
     {
         super(props);
+        axios.default.get('http://lthackathon2017api.westeurope.cloudapp.azure.com:3333/api/players')
+            .then((response) =>
+            {
+                console.log(response);
+            });
     }
 
-    render() {
-        let mappedPlayers = [];
+    public render()
+    {
+        let mappedPlayers: any[] = [];
 
         if (this.props.players)
         {
             mappedPlayers = this.props.players.map((player: any, index: number) => <Player key={index} username={player.username} />);
         }
-
 
         return (
             <div className="PlayerList">

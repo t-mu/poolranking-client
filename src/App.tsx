@@ -10,7 +10,6 @@ let { ConnectedRouter, routerReducer, routerMiddleware } = rdx;
 
 // client imports
 import DashboardContainer from './containers/DashboardContainer';
-// import { baseReducer } from './reducers';
 import './App.css';
 
 // redux setup
@@ -24,16 +23,16 @@ const store = createStore(
     }),
     applyMiddleware(middleware));
 
-export default class App extends React.Component {
 
+export default class App extends React.Component {
     render() {
 
         return (
             <Provider store={store}>
                 <ConnectedRouter history={history}>
 
-                    <div className="App">
-                        <header className="app__header">
+                    <div className="App container">
+                        <header>
                             <h1>Master class billiard ranking</h1>
                         </header>
                         <Route path={'/'} component={DashboardContainer} />

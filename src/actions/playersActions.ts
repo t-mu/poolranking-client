@@ -6,7 +6,7 @@ export const enum PlayerActionType {
     Modify = "MODIFY_PLAYER"
 }
 
-export const createPlayer = (name: string):ReducerAction<PlayerActionType, any> =>
+export const createPlayer = (name: string): ReducerAction<PlayerActionType, any> =>
 {
     return {
         type: PlayerActionType.Create,
