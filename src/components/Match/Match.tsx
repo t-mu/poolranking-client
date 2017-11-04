@@ -1,28 +1,25 @@
 import * as React from 'react';
 import './Match.css';
 
+import * as MatchModel from '../../models/match';
 
 interface Props
 {
-    model: any[];
+    match: MatchModel.Match;
 }
 
-class Match extends React.Component<Props> {
-    render() {
-        // let mappedPlayers = [];
-
-        // if (this.props.players)
-        // {
-        //     mappedPlayers = this.props.players.map((player: any, index: number) => <Player key={index} username={player.username} />);
-        // }
-
-
+class Match extends React.Component<Props>
+{
+    render()
+    {
         return (
             <div className="Match">
-                <h1>Match: xxx</h1>
+                <div>Winner: {this.props.match.winner}</div>
+                <div>Loser: {this.props.match.loser}</div>
+                {/* <h1>Match: xxx</h1>
                 <ul>
                     match props here etc
-                </ul>
+                </ul> */}
             </div>
         );
     }
