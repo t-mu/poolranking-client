@@ -1,9 +1,9 @@
 import axios from 'axios';
 import { AxiosResponse } from 'axios';
 
-import Player from './models/Player';
+import { Player } from './models/player';
 
-export class ApiService
+export default class ApiService
 {
     private endpoints: Endpoints;
     private baseUrl: string;

@@ -1,11 +1,13 @@
 // vendor imports
 import * as React from 'react';
-import * as axios from 'axios';
+// import * as axios from 'axios';
 
 // component imports
 import './PlayerList.css';
-import Player from "../Player/Player";
+import Player from '../Player/Player';
 
+import ApiService from '../../apiService';
+import * as PlayerModel from '../../models/player';
 
 interface Props
 {
@@ -17,11 +19,19 @@ class PlayerList extends React.Component<Props>
     constructor(props: any)
     {
         super(props);
-        axios.default.get('http://lthackathon2017api.westeurope.cloudapp.azure.com:3333/api/players')
-            .then((response) =>
+
+        let api = new ApiService();
+        api.getPlayers()
+            .then((players: PlayerModel.Player[]) =>
             {
-                console.log(response);
+                console.log(players);
             });
+
+        // axios.default.get('http://lthackathon2017api.westeurope.cloudapp.azure.com:3333/api/players')
+        //     .then((response) =>
+        //     {
+        //         console.log(response);
+        //     });
     }
 
     public render()
