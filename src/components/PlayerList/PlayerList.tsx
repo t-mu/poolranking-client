@@ -1,17 +1,20 @@
 // vendor imports
 import * as React from 'react';
+const reactRouter = require('react-router-dom');
+let { Link } = reactRouter;
 
 // component imports
 import './PlayerList.css';
 import Player from '../Player/Player';
 
 import ApiService from '../../apiService';
-import * as PlayerModel from '../../models/player';
+// import * as PlayerModel from '../../models/player';
 
 
 interface Props
 {
     players: any[];
+    match: any;
 }
 
 class PlayerList extends React.Component<Props>
@@ -22,11 +25,9 @@ class PlayerList extends React.Component<Props>
     public async componentDidMount()
     {
         let api = new ApiService();
-        api.getPlayers()
-            .then((players: PlayerModel.Player[]) =>
-            {
-                console.log(players);
-            });
+        this.players = await api.getPlayers();
+        this.loading = false;
+        this.forceUpdate();
     }
 
     public render()
@@ -44,6 +45,10 @@ class PlayerList extends React.Component<Props>
         return (
             <div className="PlayerList">
                 {this.loading ? <p>Loading..</p> : Players}
+                <Link to="players/new"
+                    className="navigation__link column">
+                    <button>New player</button>
+                </Link>
             </div>
         );
     }
