@@ -1,7 +1,6 @@
 import * as React from 'react';
 import './MatchList.css';
 
-
 interface Props
 {
     matches: any[];
