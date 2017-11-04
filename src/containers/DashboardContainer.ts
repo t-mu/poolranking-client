@@ -2,15 +2,6 @@ import { connect } from "react-redux";
 import { createPlayer } from "../actions/playersActions";
 import Dashboard from "../components/Dashboard/Dashboard";
 
-// interface StateProps
-// {
-//     players: any[];
-// }
-
-// interface DispatchProps
-// {
-//     createPlayer: Function;
-// }
 
 function mapStateToProps(state: any)
 {
