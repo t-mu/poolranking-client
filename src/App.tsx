@@ -2,11 +2,11 @@
 import * as React from 'react';
 const reactRouter = require('react-router-dom');
 let { Route } = reactRouter;
-import { createStore, combineReducers, applyMiddleware } from 'redux';
+import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
 const createHistory = require('history').createBrowserHistory;
 const rdx = require('react-router-redux');
-let { ConnectedRouter, routerReducer, routerMiddleware } = rdx;
+let { ConnectedRouter, routerMiddleware } = rdx;
 
 // client imports
 import DashboardContainer from './containers/DashboardContainer';
@@ -17,16 +17,10 @@ import AddPlayer from './components/AddPlayer/AddPlayer';
 import './App.css';
 
 // redux setup
-import playersReducer from "./reducers/playersReducer";
+import reducers from "./reducers";
 const history = createHistory();
 const middleware = routerMiddleware(history);
-const store = createStore(
-    combineReducers({
-        players: playersReducer,
-        router: routerReducer
-    }),
-    applyMiddleware(middleware));
-
+const store = createStore(reducers, applyMiddleware(middleware));
 
 export default class App extends React.Component {
     render() {
