@@ -8,8 +8,8 @@ const indexFilePath = path.resolve(__dirname, '../', 'build', 'index.html');
 
 app.get('/endpoints', (req, res) => {
     res.json({
-        apiGatewayHost: process.env.POOLRANKING_API_GATEWAY_SERVICE_HOST,
-        apiGatewayPort: process.env.POOLRANKING_API_GATEWAY_SERVICE_PORT
+        apiGatewayHost: process.env.POOLRANKING_API_GATEWAY_EXTERNAL_SERVICE_HOST,
+        apiGatewayPort: process.env.POOLRANKING_API_GATEWAY_EXTERNAL_SERVICE_PORT
     });
 });
 
