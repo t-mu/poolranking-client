@@ -16,7 +16,7 @@ interface Player
     score: string;
     name: string;
     wins: string;
-    loses: string;
+    losses: string;
 }
 
 class Dashboard extends React.Component<Props> {
@@ -35,19 +35,19 @@ class Dashboard extends React.Component<Props> {
                     score: "0",
                     name: "Anssi",
                     wins: "0",
-                    loses: "2"
+                    losses: "2"
                 },
                 {
                     score: "2",
                     name: "Teemu",
                     wins: "2",
-                    loses: "6"
+                    losses: "6"
                 },
                 {
                     score: "2",
                     name: "Johannes",
                     wins: "5",
-                    loses: "1"
+                    losses: "1"
                 }
             ]
         };
@@ -104,8 +104,8 @@ class Dashboard extends React.Component<Props> {
                                     <th>{player.score}</th>
                                     <th>{player.name}</th>
                                     <th>{player.wins}</th>
-                                    <th>{player.loses}</th>
-                                    <th>{parseInt(player.wins, 10) / parseInt(player.loses, 10)}</th>
+                                    <th>{player.losses}</th>
+                                    <th>{parseInt(player.wins, 10) / parseInt(player.losses, 10)}</th>
                                 </tr>
                             )
                         })}
