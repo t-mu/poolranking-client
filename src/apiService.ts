@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { AxiosResponse } from 'axios';
 
-import { Player } from './models/player';
+import { PlayerModel } from './models/player';
 import { CreatePlayerCommand } from './models/createPlayerCommand';
 import { Match } from './models/match';
 import { CreateMatchCommand } from './models/createMatchCommand';
@@ -27,27 +27,27 @@ export default class ApiService
         return response.data;
     }
 
-    public async createPlayer(name: string): Promise<Player>
+    public async createPlayer(name: string): Promise<PlayerModel>
     {
         const baseUrl = await this.getBaseUrl();
         let command: CreatePlayerCommand = {
             name: name
         }
-        const response = await axios.post<Player>(baseUrl + '/api/players', command);
+        const response = await axios.post<PlayerModel>(baseUrl + '/api/players', command);
         return response.data;
     }
 
-    public async getPlayer(id: string): Promise<Player>
+    public async getPlayer(id: string): Promise<PlayerModel>
     {
         const baseUrl = await this.getBaseUrl();
-        const response = await axios.get<Player>(baseUrl + '/api/players/' + id);
+        const response = await axios.get<PlayerModel>(baseUrl + '/api/players/' + id);
         return response.data;
     }
 
-    public async getPlayers(): Promise<Player[]>
+    public async getPlayers(): Promise<PlayerModel[]>
     {
         const baseUrl = await this.getBaseUrl();
-        const response = await axios.get<Player[]>(baseUrl + '/api/players');
+        const response = await axios.get<PlayerModel[]>(baseUrl + '/api/players');
         return response.data;
     }
 

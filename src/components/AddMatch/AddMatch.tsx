@@ -5,7 +5,7 @@ let { withRouter} = reactRouter;
 
 
 import ApiService from "../../apiService";
-import { Player } from "../../models/player"
+import { PlayerModel } from "../../models/player"
 
 interface Props
 {
@@ -14,7 +14,7 @@ interface Props
 
 class AddMatch extends React.Component<Props> {
 
-    public players: Player[];
+    public players: PlayerModel[];
     public loading: boolean = true;
     public winnerId: string;
     public loserId: string;

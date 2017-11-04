@@ -10,7 +10,6 @@ import './Dashboard.css';
 interface Props
 {
     players: any[];
-    createPlayer: Function;
 }
 
 class Dashboard extends React.Component<Props> {

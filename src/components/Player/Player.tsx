@@ -6,17 +6,13 @@ interface Props
     username: string;
 }
 
-class Player extends React.Component<Props> {
-
-    constructor(props: Props)
+class Player extends React.Component<Props>
+{
+    public render()
     {
-        super(props);
-    }
-
-    render() {
         return (
             <div className="Player">
-                <h1>My name is: {this.props.username}</h1>
+                <h1>{this.props.username}</h1>
             </div>
         );
     }
