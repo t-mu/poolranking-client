@@ -13,14 +13,11 @@ class Match extends React.Component<Props>
     render()
     {
         return (
-            <div className="Match">
-                <div>Winner: {this.props.match.winner}</div>
-                <div>Loser: {this.props.match.loser}</div>
-                {/* <h1>Match: xxx</h1>
-                <ul>
-                    match props here etc
-                </ul> */}
-            </div>
+            <tr key={this.props.match.id}>
+                <th>{this.props.match.winner}</th>
+                <th>vs.</th>
+                <th>{this.props.match.loser}</th>
+            </tr>
         );
     }
 }
