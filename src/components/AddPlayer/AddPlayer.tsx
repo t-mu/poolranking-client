@@ -1,7 +1,9 @@
 // vendor imports
 import * as React from 'react';
+const reactRouter = require('react-router-dom');
+let { withRouter } = reactRouter;
 // import ApiService from '../../apiService';
-import { Player } from '../../models/player';
+import { PlayerModel } from '../../models/player';
 
 // component imports
 import './AddPlayer.css';
@@ -9,19 +11,21 @@ import './AddPlayer.css';
 
 interface Props
 {
-    createPlayer: Function;
+    createPlayer: (username: string) => Promise<any>;
+    history: any;
 }
 
 class AddPlayer extends React.Component<Props> {
 
-    public players: Player[] = [];
+    public players: PlayerModel[] = [];
     public userName = "";
 
-    public createPlayer()
+    public async createPlayer()
     {
         if (this.userName && this.userName.trim() !== "")
         {
-            this.props.createPlayer(this.userName);
+            await this.props.createPlayer(this.userName);
+            this.props.history.push("/players");
         }
     }
 
@@ -40,4 +44,4 @@ class AddPlayer extends React.Component<Props> {
     }
 }
 
-export default AddPlayer;
+export default withRouter(AddPlayer);

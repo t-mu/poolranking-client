@@ -1,4 +1,6 @@
 import * as React from 'react';
+const reactRouter = require('react-router-dom');
+let { Link } = reactRouter;
 
 import './MatchList.css';
 import Match from '../Match/Match';
@@ -9,6 +11,7 @@ import * as MatchModel from '../../models/match';
 interface Props
 {
     matches: any[];
+    history: any;
 }
 
 class MatchList extends React.Component<Props>
@@ -55,6 +58,10 @@ class MatchList extends React.Component<Props>
         return (
             <div className="MatchList">
                 {this.loading ? <p>Loading...</p> : Matches}
+                <Link to="matches/new"
+                    className="navigation__link column">
+                    <button>New match</button>
+                </Link>
             </div>
         );
     }

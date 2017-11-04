@@ -7,6 +7,11 @@ export default function playersReducer(state = [], action: ReducerAction<PlayerA
     {
         case PlayerActionType.Create:
             return [...state, action.payload];
+        case PlayerActionType.Fetch:
+            if (action.payload)
+            {
+                return action.payload;
+            }
         default:
             return state;
     }

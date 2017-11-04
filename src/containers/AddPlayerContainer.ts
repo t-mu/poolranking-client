@@ -1,6 +1,7 @@
 import { connect } from "react-redux";
 import { createPlayer } from "../actions/playersActions";
 import AddPlayer from "../components/AddPlayer/AddPlayer";
+import ApiService from "../apiService";
 
 
 function mapStateToProps(state: any)
@@ -13,8 +14,16 @@ function mapStateToProps(state: any)
 function mapDispatchToProps(dispatch: Function)
 {
     return {
-        createPlayer: (username: string) => {
-            dispatch(createPlayer(username));
+        createPlayer: async (username: string) =>
+        {
+            let api = new ApiService();
+            const player = await api.createPlayer(username);
+
+            if (player)
+            {
+                // update state if success
+                dispatch(createPlayer(username));
+            }
         }
     }
 }

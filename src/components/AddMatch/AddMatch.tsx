@@ -1,8 +1,8 @@
 import * as React from 'react';
-import './AddMatch.css';
+// import './AddMatch.css';
 
 import ApiService from "../../apiService";
-import { Player } from "../../models/player"
+import { PlayerModel } from "../../models/player"
 
 interface Props
 {
@@ -12,7 +12,7 @@ interface Props
 class AddMatch extends React.Component<Props> {
 
     public match: any;
-    public players: Player[];
+    public players: PlayerModel[];
 
     constructor()
     {
