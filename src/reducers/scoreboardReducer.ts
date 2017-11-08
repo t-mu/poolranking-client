@@ -1,7 +1,7 @@
 import { ScoreboardActionType } from "../actions/scoreboardActions";
 import { ReducerAction } from "../actions/actions";
 
-export default function scoreboardReducer(state = [], action: ReducerAction<ScoreboardActionType, any>)
+export default function scoreboardReducer(state: any = [], action: ReducerAction<ScoreboardActionType, any>)
 {
     switch (action.type)
     {

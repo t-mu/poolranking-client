@@ -13,7 +13,7 @@ function mapDispatchToProps(dispatch: Function)
 {
     return {
         addMatch: (match: any) => {
-            dispatch(addMatch(match))
+            dispatch(addMatch(match));
         }
     };
 }
