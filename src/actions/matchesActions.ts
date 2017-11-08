@@ -1,6 +1,5 @@
 import { ReducerAction } from "./actions";
 
-
 export const enum MatchActionType {
     Add = "ADD_MATCH"
 }
@@ -15,5 +14,5 @@ export const addMatch = (match: any): ReducerAction<MatchActionType, any> =>
             winner: match.winnerId,
             loser: match.loserId
         }
-    }
-}
+    };
+};

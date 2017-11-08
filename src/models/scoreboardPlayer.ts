@@ -1,8 +1,8 @@
+import { PlayerModel } from "./player";
+
 export interface ScoreboardPlayer
 {
-    rating: string;
-    playerName: string;
-    playerId: string;
+    player: PlayerModel;
     wins: string;
     losses: string;
 }

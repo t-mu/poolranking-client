@@ -1,6 +1,4 @@
 import { ReducerAction } from "./actions";
-import { PlayerModel } from "../models/player";
-
 
 export const enum PlayerActionType {
     Create = "CREATE_PLAYER",
@@ -15,13 +13,13 @@ export const createPlayer = (name: string): ReducerAction<PlayerActionType, any>
         payload: {
             username: name
         }
-    }
+    };
 }
 
-export const fetchPlayers = (players: PlayerModel[]): ReducerAction<PlayerActionType, PlayerModel[]> =>
+export const fetchPlayers = (): ReducerAction<PlayerActionType, any> =>
 {
     return {
         type: PlayerActionType.Fetch,
-        payload: players
-    }
+        payload: null
+    };
 }

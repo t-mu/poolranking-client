@@ -1,12 +1,12 @@
-import * as React from 'react';
-const reactRouter = require('react-router-dom');
+import * as React from "react";
+const reactRouter = require("react-router-dom");
 let { Link } = reactRouter;
 
-import './MatchList.css';
-import Match from '../Match/Match';
+import "./MatchList.css";
+import Match from "../Match/Match";
 
-import ApiService from '../../apiService';
-import * as MatchModel from '../../models/match';
+import ApiService from "../../apiMockService";
+import * as MatchModel from "../../models/match";
 
 interface Props
 {
@@ -58,8 +58,10 @@ class MatchList extends React.Component<Props>
         return (
             <div className="MatchList">
                 {this.loading ? <p>Loading...</p> : Matches}
-                <Link to="matches/new"
-                    className="navigation__link column">
+                <Link
+                    to="matches/new"
+                    className="navigation__link column"
+                >
                     <button>New match</button>
                 </Link>
             </div>

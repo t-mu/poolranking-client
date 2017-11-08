@@ -6,7 +6,7 @@ function mapStateToProps(state: any)
 {
     return {
         matches: state.matches
-    }
+    };
 }
 
 function mapDispatchToProps(dispatch: Function)
@@ -15,7 +15,7 @@ function mapDispatchToProps(dispatch: Function)
         addMatch: (match: any) => {
             dispatch(addMatch(match))
         }
-    }
+    };
 }
 
 const AddMatchContainer = connect<any, any>(mapStateToProps, mapDispatchToProps)(AddMatch);

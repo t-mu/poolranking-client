@@ -1,33 +1,45 @@
 // vendor imports
-import * as React from 'react';
-import ApiService from '../../apiService';
-import { ScoreboardPlayer } from '../../models/scoreboardPlayer';
+import * as React from "react";
+// import ApiService from "../../apiMockService";
+import { ScoreboardPlayer } from "../../models/scoreboardPlayer";
 
 // component imports
-import './Dashboard.css';
-
+import "./Scoreboard.css";
 
 interface Props
 {
-    players: any[];
+    scoreboard?: any[];
+    fetchScoreboard?: Function;
 }
 
-class Dashboard extends React.Component<Props> {
+class Scoreboard extends React.Component<Props> {
 
-    public players: ScoreboardPlayer[] = [];
     public loading = true;
+
+    constructor(props: Props)
+    {
+        super(props);
+    }
 
     public async componentDidMount()
     {
-        let api = new ApiService();
-        this.players = await api.getScoreboard();
-        this.loading = false;
-        this.forceUpdate();
+        if (this.props.fetchScoreboard)
+        {
+            this.props.fetchScoreboard();
+        }
     }
 
     render() {
+        let scoreboard: ScoreboardPlayer[] = [];
+
+        if (this.props.scoreboard)
+        {
+            scoreboard = this.props.scoreboard;
+            this.loading = false;
+        }
+
         return (
-            <div className="Dashboard">
+            <div className="Scoreboard">
                 {this.loading ? <p>loading</p> :
                     <table className="table container is-bordered is-striped">
                         <thead>
@@ -49,16 +61,16 @@ class Dashboard extends React.Component<Props> {
                             </tr>
                         </tfoot>
                         <tbody>
-                        {this.players.map((player) => {
+                        {scoreboard.map((score) => {
                             return (
-                                <tr key={player.playerId}>
-                                    <th>{player.rating}</th>
-                                    <th>{player.playerName}</th>
-                                    <th>{player.wins}</th>
-                                    <th>{player.losses}</th>
-                                    <th>{parseInt(player.wins, 10) / parseInt(player.losses, 10)}</th>
+                                <tr key={score.player.id}>
+                                    <th>{score.player.rating}</th>
+                                    <th>{score.player.name}</th>
+                                    <th>{score.wins}</th>
+                                    <th>{score.losses}</th>
+                                    <th>{parseInt(score.wins, 10) / parseInt(score.losses, 10)}</th>
                                 </tr>
-                            )
+                            );
                         })}
                         </tbody>
                     </table>}
@@ -67,4 +79,4 @@ class Dashboard extends React.Component<Props> {
     }
 }
 
-export default Dashboard;
+export default Scoreboard;

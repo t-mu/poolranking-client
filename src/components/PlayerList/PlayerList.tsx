@@ -1,17 +1,16 @@
 // vendor imports
-import * as React from 'react';
-const reactRouter = require('react-router-dom');
+import * as React from "react";
+const reactRouter = require("react-router-dom");
 let { Link } = reactRouter;
-import { connect } from "react-redux";
+// import { connect } from "react-redux";
 
 // component imports
-import './PlayerList.css';
-import Player from '../Player/Player';
+import "./PlayerList.css";
+import Player from "../Player/Player";
 
-import ApiService from '../../apiService';
-import { fetchPlayers } from "../../actions/playersActions";
-import { PlayerModel } from "../../models/player";
-
+import ApiService from "../../apiMockService";
+// import { fetchPlayers } from "../../actions/playersActions";
+// import { PlayerModel } from "../../models/player";
 
 interface Props
 {
@@ -24,7 +23,7 @@ interface DispatchProps
     fetchPlayers: Function;
 }
 
-class PlayerList extends React.Component<Props & DispatchProps>
+export class PlayerList extends React.Component<Props & DispatchProps>
 {
     public loading = true;
     public players: any[] = [];
@@ -53,8 +52,10 @@ class PlayerList extends React.Component<Props & DispatchProps>
         return (
             <div className="PlayerList">
                 {this.loading ? <p>Loading..</p> : Players}
-                <Link to="players/new"
-                    className="navigation__link column">
+                <Link
+                    to="players/new"
+                    className="navigation__link column"
+                >
                     <button>New player</button>
                 </Link>
             </div>
@@ -62,23 +63,23 @@ class PlayerList extends React.Component<Props & DispatchProps>
     }
 }
 
-function mapStateToProps(state: any)
-{
-    return {
-        players: state.players
-    }
-}
+// function mapStateToProps(state: any)
+// {
+//     return {
+//         players: state.players
+//     };
+// }
 
-function mapDispatchToProps(dispatch: Function)
-{
-    return {
-        fetchPlayers: (players: PlayerModel[]) =>
-        {
-            dispatch(fetchPlayers(players));
-        }
-    }
-}
+// function mapDispatchToProps(dispatch: Function)
+// {
+//     return {
+//         fetchPlayers: (players: PlayerModel[]) =>
+//         {
+//             dispatch(fetchPlayers(players));
+//         }
+//     };
+// }
 
-const PlayerListContainer = connect<any, any>(mapStateToProps, mapDispatchToProps)(PlayerList);
+// const PlayerListContainer = connect<any, any>(mapStateToProps, mapDispatchToProps)(PlayerList);
 
-export { PlayerListContainer };
+// export { PlayerListContainer };

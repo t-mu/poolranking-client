@@ -1,14 +1,13 @@
 import { connect } from "react-redux";
 import { createPlayer } from "../actions/playersActions";
 import AddPlayer from "../components/AddPlayer/AddPlayer";
-import ApiService from "../apiService";
-
+import ApiService from "../apiMockService";
 
 function mapStateToProps(state: any)
 {
     return {
         players: state.players
-    }
+    };
 }
 
 function mapDispatchToProps(dispatch: Function)

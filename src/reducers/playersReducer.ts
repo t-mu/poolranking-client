@@ -1,5 +1,5 @@
 import { PlayerActionType } from "../actions/playersActions";
-import { ReducerAction } from "../actions/actions"
+import { ReducerAction } from "../actions/actions";
 
 export default function playersReducer(state = [], action: ReducerAction<PlayerActionType, any>)
 {
@@ -12,8 +12,8 @@ export default function playersReducer(state = [], action: ReducerAction<PlayerA
             {
                 return action.payload;
             }
+            break;
         default:
             return state;
     }
 }
-
