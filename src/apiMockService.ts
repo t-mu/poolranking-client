@@ -27,13 +27,14 @@ const mockScoreboardPlayers: ScoreboardPlayer[] = [
 
 const mockMatches: Match[] = [
     { id: "m1", winnerId: "p1", winner: "player1", loserId: "p2", loser: "player2" },
-    { id: "m3", winnerId: "p1", winner: "player1", loserId: "p2", loser: "player2" },
+    { id: "m2", winnerId: "p1", winner: "player1", loserId: "p2", loser: "player2" },
+    { id: "m3", winnerId: "p2", winner: "player2", loserId: "p3", loser: "player3" },
     { id: "m4", winnerId: "p2", winner: "player2", loserId: "p3", loser: "player3" },
-    { id: "m5", winnerId: "p2", winner: "player2", loserId: "p3", loser: "player3" },
-]
+];
 
 export default class ApiService
 {
+    private static latestMatchId: number = 5;
 
     public async getScoreboard(): Promise<ScoreboardPlayer[]>
     {
@@ -65,7 +66,8 @@ export default class ApiService
 
     public async createMatch(winnerId: string, loserId: string): Promise<Match>
     {
-        return { id: "newMatch", winnerId: "p1", winner: "player1", loserId: "p2", loser: "player2" };
+        let nextMatchId = ApiService.latestMatchId++;
+        return { id: nextMatchId.toString(), winnerId: "p1", winner: "player1", loserId: "p2", loser: "player2" };
     }
 
     public async getMatch(id: string): Promise<Match | null>

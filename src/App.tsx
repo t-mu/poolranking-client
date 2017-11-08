@@ -12,11 +12,11 @@ import ReduxThunk from "redux-thunk";
 // client imports
 import ScoreboardContainer from "./containers/ScoreboardContainer";
 import MatchList from "./components/MatchList/MatchList";
-import AddMatch from "./components/AddMatch/AddMatch";
+import AddMatchContainer from "./containers/AddMatchContainer";
 import Navigation from "./components/Navigation/Navigation";
 import { PlayerList } from "./components/PlayerList/PlayerList";
-import { PlayerModel } from "./models/player";
-import { ScoreboardPlayer } from "./models/scoreboardPlayer";
+import { PlayerActionType } from "./actions/playersActions";
+import { MatchActionType } from "./actions/matchesActions";
 import AddPlayerContainer from "./containers/AddPlayerContainer";
 import "./App.css";
 
@@ -26,27 +26,17 @@ const history = createHistory();
 const middleware = routerMiddleware(ReduxThunk, history);
 const store = createStore(reducers, applyMiddleware(middleware));
 
-interface Props {
-    players?: PlayerModel[];
-    scoreboard?: ScoreboardPlayer[];
-    fetchScoreboard?: Function;
-}
+import ApiService from "./apiMockService";
+const api = new ApiService();
 
-export default class App extends React.Component<Props> {
+export default class App extends React.Component {
 
-    constructor(props: Props)
-    {
-        super(props);
-    }
+    public async componentWillMount()
+    {   let players = await api.getPlayers();
+        store.dispatch({ type: PlayerActionType.Fetch, payload: players });
 
-    public async componentDidMount(): Promise<void>
-    {
-        console.log("PERKELÖE");
-
-        if (this.props.fetchScoreboard)
-        {
-            await this.props.fetchScoreboard();
-        }
+        let matches = await api.getMatches();
+        store.dispatch({ type: MatchActionType.Fetch, payload: matches });
     }
 
     render() {
@@ -62,7 +52,7 @@ export default class App extends React.Component<Props> {
                     </header>
                         <Route exact path={"/"} component={ScoreboardContainer} />
                         <Route exact path={"/matches"} component={MatchList} />
-                        <Route exact path={"/matches/new"} component={AddMatch} />
+                        <Route exact path={"/matches/new"} component={AddMatchContainer} />
                         <Route exact path={"/players"} component={PlayerList} />
                         <Route exact path={"/players/new"} component={AddPlayerContainer} />
                     </div>

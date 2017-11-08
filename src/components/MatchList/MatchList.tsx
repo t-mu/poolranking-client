@@ -5,7 +5,6 @@ let { Link } = reactRouter;
 import "./MatchList.css";
 import Match from "../Match/Match";
 
-import ApiService from "../../apiMockService";
 import * as MatchModel from "../../models/match";
 
 interface Props
@@ -19,13 +18,7 @@ class MatchList extends React.Component<Props>
     public loading = true;
     public matches: MatchModel.Match[] = [];
 
-    public async componentDidMount()
-    {
-        let api = new ApiService();
-        this.matches = await api.getMatches();
-        this.loading = false;
-        this.forceUpdate();
-    }
+
 
     public render()
     {
