@@ -9,8 +9,6 @@ const api = new ApiService();
 function mapStateToProps(state: any)
 {
     return {
-        matches: state.matches,
-        players: state.players,
         scoreboard: state.scoreboard
     };
 }
@@ -18,13 +16,9 @@ function mapStateToProps(state: any)
 function mapDispatchToProps(dispatch: Function)
 {
     return {
-        fetchScoreboard: () => {
-
-                api.getScoreboard()
-                    .then(response => {
-                        dispatch(fetchScoreboard(response));
-                    });
-
+        fetchScoreboard: async () => {
+            const scoreboard = await api.getScoreboard();
+            dispatch(fetchScoreboard(scoreboard));
         }
     };
 }
