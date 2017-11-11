@@ -33,7 +33,7 @@ function mapDispatchToProps(dispatch: any): DispatchProps
             if (player)
             {
                 // update state if player is returned
-                dispatch(createPlayer(username));
+                dispatch(createPlayer(player));
             }
         }
     };

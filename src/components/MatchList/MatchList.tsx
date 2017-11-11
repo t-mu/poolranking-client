@@ -10,9 +10,6 @@ import * as MatchModel from "../../models/match";
 
 class MatchList extends React.Component<StateProps & DispatchProps>
 {
-    public loading = true;
-    public matches: MatchModel.Match[] = [];
-
     constructor(props: StateProps & DispatchProps)
     {
         super(props);
@@ -20,7 +17,7 @@ class MatchList extends React.Component<StateProps & DispatchProps>
 
     public render()
     {
-        const mappedMatches = this.props.matches.map((match: any, index: number) => <Match key={index} match={match} />);
+        const mappedMatches = this.props.matches.map((match: MatchModel.Match, index: number) => <Match key={index} match={match} />);
 
         return (
             <div className="MatchList">

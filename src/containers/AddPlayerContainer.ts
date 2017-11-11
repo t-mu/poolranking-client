@@ -30,12 +30,12 @@ function mapDispatchToProps(dispatch: any): DispatchProps
     return {
         createPlayer: async (username: string) =>
         {
-            const player = await api.createPlayer(username);
+            const player: PlayerModel = await api.createPlayer(username);
 
             if (player)
             {
                 // update state if player is returned
-                dispatch(createPlayer(username));
+                dispatch(createPlayer(player));
             }
         }
     };

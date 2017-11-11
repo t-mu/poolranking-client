@@ -5,9 +5,9 @@ import { Match } from "./models/match";
 import { ScoreboardPlayer } from "./models/scoreboardPlayer";
 
 const mockPlayers: PlayerModel[] = [
-    { id: "p1", name: "player1", rating: 1505 },
-    { id: "p2", name: "player2", rating: 1495 },
-    { id: "p3", name: "player3", rating: 1475 }
+    { id: "1", name: "player1", rating: 1505 },
+    { id: "2", name: "player2", rating: 1495 },
+    { id: "3", name: "player3", rating: 1475 }
 ];
 
 const mockScoreboardPlayers: ScoreboardPlayer[] = [
@@ -26,14 +26,15 @@ const mockScoreboardPlayers: ScoreboardPlayer[] = [
 ];
 
 const mockMatches: Match[] = [
-    { id: "m1", winnerId: "p1", winner: "player1", loserId: "p2", loser: "player2" },
-    { id: "m2", winnerId: "p1", winner: "player1", loserId: "p2", loser: "player2" },
-    { id: "m3", winnerId: "p2", winner: "player2", loserId: "p3", loser: "player3" },
-    { id: "m4", winnerId: "p2", winner: "player2", loserId: "p3", loser: "player3" },
+    { id: "1", winnerId: "1", winner: "player1", loserId: "2", loser: "player2" },
+    { id: "2", winnerId: "1", winner: "player1", loserId: "2", loser: "player2" },
+    { id: "3", winnerId: "2", winner: "player2", loserId: "3", loser: "player3" },
+    { id: "4", winnerId: "2", winner: "player2", loserId: "3", loser: "player3" },
 ];
 
 export default class ApiService
 {
+    private static latestPlayerId: number = 4;
     private static latestMatchId: number = 5;
 
     public async getScoreboard(): Promise<ScoreboardPlayer[]>
@@ -43,7 +44,8 @@ export default class ApiService
 
     public async createPlayer(name: string): Promise<PlayerModel>
     {
-        return { id: "newId", name: name, rating: 1500 };
+        let nextPlayerId = ApiService.latestPlayerId++;
+        return { id: nextPlayerId.toString(), name: name, rating: 1500 };
     }
 
     public async getPlayer(id: string): Promise<PlayerModel | null>

@@ -36,7 +36,8 @@ class AddPlayer extends React.Component<StateProps & DispatchProps> {
     render() {
         return (
             <div className="AddPlayer">
-                New player name: <input onChange={this.updateUsername.bind(this)} />
+                <label htmlFor="username">Username:</label>
+                <input name="username" onChange={this.updateUsername.bind(this)} />
                 <button onClick={this.createPlayer.bind(this)}>Create player</button>
             </div>
         );
