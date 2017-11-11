@@ -1,7 +1,7 @@
-import * as React from 'react';
-import './Match.css';
+import * as React from "react";
 
-import * as MatchModel from '../../models/match';
+import "./Match.css";
+import * as MatchModel from "../../models/match";
 
 interface Props
 {
@@ -13,11 +13,11 @@ class Match extends React.Component<Props>
     render()
     {
         return (
-            <tr key={this.props.match.id}>
-                <th>{this.props.match.winner}</th>
-                <th>vs.</th>
-                <th>{this.props.match.loser}</th>
-            </tr>
+            <div className="columns">
+                <span className="column is-two-fifths">{this.props.match.winner}</span>
+                <span className="column is-one-fifth">vs.</span>
+                <span className="column is-two-fifths">{this.props.match.loser}</span>
+            </div>
         );
     }
 }

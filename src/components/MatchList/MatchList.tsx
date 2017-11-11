@@ -4,53 +4,37 @@ let { Link } = reactRouter;
 
 import "./MatchList.css";
 import Match from "../Match/Match";
+import { StateProps, DispatchProps } from "../../containers/MatchListContainer";
 
 import * as MatchModel from "../../models/match";
 
-interface Props
-{
-    matches: any[];
-    history: any;
-}
-
-class MatchList extends React.Component<Props>
+class MatchList extends React.Component<StateProps & DispatchProps>
 {
     public loading = true;
     public matches: MatchModel.Match[] = [];
 
-
+    constructor(props: StateProps & DispatchProps)
+    {
+        super(props);
+    }
 
     public render()
     {
-        const mappedMatches = this.matches.map((match: any, index: number) => <Match key={index} match={match} />);
-        const Matches = (
-            <div className="Dashboard">
-                {this.loading ? <p>Loading...</p> :
-                    <table className="table container is-bordered is-striped">
-                        <thead>
-                            <tr>
-                                <th>Winner</th>
-                                <th></th>
-                                <th>Loser</th>
-                            </tr>
-                        </thead>
-                        <tfoot>
-                            <tr>
-                                <th>Winner</th>
-                                <th></th>
-                                <th>Loser</th>
-                            </tr>
-                        </tfoot>
-                        <tbody>
-                        {mappedMatches}
-                        </tbody>
-                    </table>}
-            </div>
-        );
+        const mappedMatches = this.props.matches.map((match: any, index: number) => <Match key={index} match={match} />);
 
         return (
             <div className="MatchList">
-                {this.loading ? <p>Loading...</p> : Matches}
+
+                {/* matchlist header */}
+                <div className="columns">
+                    <span className="column is-two-fifths">WINNER</span>
+                    <span className="column is-one-fifth"></span>
+                    <span className="column is-two-fifths">LOSER</span>
+                </div>
+
+                {/* matches */}
+                {mappedMatches}
+
                 <Link
                     to="matches/new"
                     className="navigation__link column"

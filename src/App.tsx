@@ -14,9 +14,9 @@ import ScoreboardContainer from "./containers/ScoreboardContainer";
 import AddPlayerContainer from "./containers/AddPlayerContainer";
 import AddMatchContainer from "./containers/AddMatchContainer";
 import PlayerListContainer from "./containers/PlayerListContainer";
+import MatchListContainer from "./containers/MatchListContainer";
 
 import Navigation from "./components/Navigation/Navigation";
-import MatchList from "./components/MatchList/MatchList";
 import { PlayerActionType } from "./actions/playersActions";
 import { MatchActionType } from "./actions/matchesActions";
 import { ScoreboardActionType } from "./actions/scoreboardActions";
@@ -57,7 +57,7 @@ export default class App extends React.Component {
                         <Navigation />
                     </header>
                         <Route exact path="/" render={(props: any) => <ScoreboardContainer {...props} />} />
-                        <Route exact path="/matches" render={(props: any) => <MatchList {...props} />} />
+                        <Route exact path="/matches" render={(props: any) => <MatchListContainer {...props} />} />
                         <Route exact path="/matches/new" render={(props: any) => <AddMatchContainer {...props} />} />
                         <Route exact path="/players" render={(props: any) => <PlayerListContainer {...props} />} />
                         <Route exact path="/players/new" render={(props: any) => <AddPlayerContainer {...props} />} />

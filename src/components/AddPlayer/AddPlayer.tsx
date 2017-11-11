@@ -2,22 +2,22 @@
 import * as React from "react";
 const reactRouter = require("react-router-dom");
 let { withRouter } = reactRouter;
-// import ApiService from '../../apiService';
+
 import { PlayerModel } from "../../models/player";
+import { StateProps, DispatchProps } from "../../containers/AddPlayerContainer";
 
 // component imports
 import "./AddPlayer.css";
 
-interface Props
-{
-    createPlayer: (username: string) => Promise<any>;
-    history: any;
-}
-
-class AddPlayer extends React.Component<Props> {
+class AddPlayer extends React.Component<StateProps & DispatchProps> {
 
     public players: PlayerModel[] = [];
     public userName = "";
+
+    constructor(props: StateProps & DispatchProps)
+    {
+        super(props);
+    }
 
     public async createPlayer()
     {
