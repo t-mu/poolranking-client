@@ -8,11 +8,7 @@ export default function playersReducer(state: any = [], action: ReducerAction<Pl
         case PlayerActionType.Create:
             return [...state, action.payload];
         case PlayerActionType.Fetch:
-            if (action.payload)
-            {
-                return action.payload;
-            }
-            break;
+            return action.payload ? action.payload : state;
         default:
             return state;
     }

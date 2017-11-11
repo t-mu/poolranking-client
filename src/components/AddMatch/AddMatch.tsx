@@ -4,22 +4,16 @@ const reactRouter = require("react-router-dom");
 let { withRouter} = reactRouter;
 
 import { PlayerModel } from "../../models/player";
+import { StateProps, DispatchProps } from "../../containers/AddMatchContainer";
 
-interface Props
-{
-    history: any;
-    players: PlayerModel[];
-    addMatch: Function;
-}
-
-class AddMatch extends React.Component<Props> {
+class AddMatch extends React.Component<StateProps & DispatchProps> {
 
     public players: PlayerModel[];
     public loading: boolean = true;
     public winnerId: string;
     public loserId: string;
 
-    constructor(props: Props)
+    constructor(props: StateProps & DispatchProps)
     {
         super(props);
     }

@@ -11,13 +11,15 @@ import ReduxThunk from "redux-thunk";
 
 // client imports
 import ScoreboardContainer from "./containers/ScoreboardContainer";
-import MatchList from "./components/MatchList/MatchList";
+import AddPlayerContainer from "./containers/AddPlayerContainer";
 import AddMatchContainer from "./containers/AddMatchContainer";
+
 import Navigation from "./components/Navigation/Navigation";
+import MatchList from "./components/MatchList/MatchList";
 import { PlayerList } from "./components/PlayerList/PlayerList";
 import { PlayerActionType } from "./actions/playersActions";
 import { MatchActionType } from "./actions/matchesActions";
-import AddPlayerContainer from "./containers/AddPlayerContainer";
+import { ScoreboardActionType } from "./actions/scoreboardActions";
 import "./App.css";
 
 // redux setup
@@ -32,7 +34,11 @@ const api = new ApiService();
 export default class App extends React.Component {
 
     public async componentWillMount()
-    {   let players = await api.getPlayers();
+    {
+        let scoreboard = await api.getScoreboard();
+        store.dispatch({ type: ScoreboardActionType.Fetch, payload: scoreboard });
+
+        let players = await api.getPlayers();
         store.dispatch({ type: PlayerActionType.Fetch, payload: players });
 
         let matches = await api.getMatches();

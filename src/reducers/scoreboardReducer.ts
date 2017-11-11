@@ -6,11 +6,7 @@ export default function scoreboardReducer(state: any = [], action: ReducerAction
     switch (action.type)
     {
         case ScoreboardActionType.Fetch:
-            if (action.payload)
-            {
-                return action.payload;
-            }
-            break;
+            return action.payload ? action.payload : state;
         default:
             return state;
     }

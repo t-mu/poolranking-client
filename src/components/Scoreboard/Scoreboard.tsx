@@ -1,31 +1,18 @@
 // vendor imports
 import * as React from "react";
 import { ScoreboardPlayer } from "../../models/scoreboardPlayer";
+import { StateProps, DispatchProps } from "../../containers/ScoreboardContainer";
 
 // component imports
 import "./Scoreboard.css";
 
-interface Props
-{
-    scoreboard?: any[];
-    fetchScoreboard?: Function;
-}
-
-class Scoreboard extends React.Component<Props> {
+class Scoreboard extends React.Component<StateProps & DispatchProps> {
 
     public loading = true;
 
-    constructor(props: Props)
+    constructor(props: StateProps & DispatchProps)
     {
         super(props);
-    }
-
-    public async componentDidMount()
-    {
-        if (this.props.fetchScoreboard)
-        {
-            this.props.fetchScoreboard();
-        }
     }
 
     render() {

@@ -1,13 +1,12 @@
 // vendor imports
-import * as React from 'react';
-const reactRouter = require('react-router-dom');
+import * as React from "react";
+const reactRouter = require("react-router-dom");
 let { withRouter } = reactRouter;
 // import ApiService from '../../apiService';
-import { PlayerModel } from '../../models/player';
+import { PlayerModel } from "../../models/player";
 
 // component imports
-import './AddPlayer.css';
-
+import "./AddPlayer.css";
 
 interface Props
 {

@@ -2,44 +2,32 @@
 import * as React from "react";
 const reactRouter = require("react-router-dom");
 let { Link } = reactRouter;
-// import { connect } from "react-redux";
 
 // component imports
 import "./PlayerList.css";
 import Player from "../Player/Player";
 
-import ApiService from "../../apiMockService";
-// import { fetchPlayers } from "../../actions/playersActions";
-// import { PlayerModel } from "../../models/player";
+import { PlayerModel } from "../../models/player";
 
 interface Props
 {
-    players: any[];
-    match: any;
+    players: PlayerModel[];
 }
 
-interface DispatchProps
-{
-    fetchPlayers: Function;
-}
-
-export class PlayerList extends React.Component<Props & DispatchProps>
+export class PlayerList extends React.Component<Props>
 {
     public loading = true;
-    public players: any[] = [];
 
-    public async componentDidMount()
+    constructor(props: Props)
     {
-        let api = new ApiService();
-        this.players = await api.getPlayers();
-        this.props.fetchPlayers(this.players);
-        this.loading = false;
-        this.forceUpdate();
+        super(props);
     }
 
     public render()
     {
-        const mappedPlayers = this.props.players.map((player: any, index: number) => <Player key={index} username={player.name} />);
+        const mappedPlayers = this.props.players ? this.props.players.map((player: PlayerModel) =>
+             <li key={player.id}><Player username={player.name} /></li>) : null;
+
         const Players = (
             <div>
                 <h1>Here are the players:</h1>
@@ -63,23 +51,4 @@ export class PlayerList extends React.Component<Props & DispatchProps>
     }
 }
 
-// function mapStateToProps(state: any)
-// {
-//     return {
-//         players: state.players
-//     };
-// }
-
-// function mapDispatchToProps(dispatch: Function)
-// {
-//     return {
-//         fetchPlayers: (players: PlayerModel[]) =>
-//         {
-//             dispatch(fetchPlayers(players));
-//         }
-//     };
-// }
-
-// const PlayerListContainer = connect<any, any>(mapStateToProps, mapDispatchToProps)(PlayerList);
-
-// export { PlayerListContainer };
+export default PlayerList;
