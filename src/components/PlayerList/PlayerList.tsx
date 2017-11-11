@@ -6,40 +6,24 @@ let { Link } = reactRouter;
 // component imports
 import "./PlayerList.css";
 import Player from "../Player/Player";
+import { StateProps, DispatchProps } from "../../containers/PlayerListContainer";
 
 import { PlayerModel } from "../../models/player";
 
-interface Props
-{
-    players: PlayerModel[];
-}
-
-export class PlayerList extends React.Component<Props>
+export class PlayerList extends React.Component<StateProps & DispatchProps>
 {
     public loading = true;
 
-    constructor(props: Props)
+    constructor(props: StateProps & DispatchProps)
     {
         super(props);
     }
 
     public render()
     {
-        const mappedPlayers = this.props.players ? this.props.players.map((player: PlayerModel) =>
-             <li key={player.id}><Player username={player.name} /></li>) : null;
-
-        const Players = (
-            <div>
-                <h1>Here are the players:</h1>
-                <ul>
-                    {mappedPlayers}
-                </ul>
-            </div>
-        );
-
         return (
             <div className="PlayerList">
-                {this.loading ? <p>Loading..</p> : Players}
+                {this.props.players.map((player: PlayerModel, index: number) => <Player key={index} username={player.name} />)}
                 <Link
                     to="players/new"
                     className="navigation__link column"

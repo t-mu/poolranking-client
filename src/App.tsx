@@ -13,10 +13,10 @@ import ReduxThunk from "redux-thunk";
 import ScoreboardContainer from "./containers/ScoreboardContainer";
 import AddPlayerContainer from "./containers/AddPlayerContainer";
 import AddMatchContainer from "./containers/AddMatchContainer";
+import PlayerListContainer from "./containers/PlayerListContainer";
 
 import Navigation from "./components/Navigation/Navigation";
 import MatchList from "./components/MatchList/MatchList";
-import { PlayerList } from "./components/PlayerList/PlayerList";
 import { PlayerActionType } from "./actions/playersActions";
 import { MatchActionType } from "./actions/matchesActions";
 import { ScoreboardActionType } from "./actions/scoreboardActions";
@@ -56,11 +56,11 @@ export default class App extends React.Component {
                         <h1>Pool ranking</h1>
                         <Navigation />
                     </header>
-                        <Route exact path={"/"} component={ScoreboardContainer} />
-                        <Route exact path={"/matches"} component={MatchList} />
-                        <Route exact path={"/matches/new"} component={AddMatchContainer} />
-                        <Route exact path={"/players"} component={PlayerList} />
-                        <Route exact path={"/players/new"} component={AddPlayerContainer} />
+                        <Route exact path="/" render={(props: any) => <ScoreboardContainer {...props} />} />
+                        <Route exact path="/matches" render={(props: any) => <MatchList {...props} />} />
+                        <Route exact path="/matches/new" render={(props: any) => <AddMatchContainer {...props} />} />
+                        <Route exact path="/players" render={(props: any) => <PlayerListContainer {...props} />} />
+                        <Route exact path="/players/new" render={(props: any) => <AddPlayerContainer {...props} />} />
                     </div>
 
                 </ConnectedRouter>
