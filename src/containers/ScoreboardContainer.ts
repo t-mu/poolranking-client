@@ -5,8 +5,6 @@ import { ScoreboardPlayer } from "../models/scoreboardPlayer";
 
 import ApiService from "../apiMockService";
 
-const api = new ApiService();
-
 export interface StateProps
 {
     scoreboard: ScoreboardPlayer[];
@@ -29,7 +27,7 @@ function mapDispatchToProps(dispatch: any): DispatchProps
     return {
         fetchScoreboard: async () =>
         {
-            const scoreboard = await api.getScoreboard();
+            const scoreboard = await ApiService.getScoreboard();
             dispatch(fetchScoreboard(scoreboard));
         }
     };

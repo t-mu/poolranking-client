@@ -29,19 +29,18 @@ const middleware = routerMiddleware(ReduxThunk, history);
 const store = createStore(reducers, applyMiddleware(middleware));
 
 import ApiService from "./apiMockService";
-const api = new ApiService();
 
 export default class App extends React.Component {
 
     public async componentWillMount()
     {
-        let scoreboard = await api.getScoreboard();
+        let scoreboard = await ApiService.getScoreboard();
         store.dispatch({ type: ScoreboardActionType.Fetch, payload: scoreboard });
 
-        let players = await api.getPlayers();
+        let players = await ApiService.getPlayers();
         store.dispatch({ type: PlayerActionType.Fetch, payload: players });
 
-        let matches = await api.getMatches();
+        let matches = await ApiService.getMatches();
         store.dispatch({ type: MatchActionType.Fetch, payload: matches });
     }
 

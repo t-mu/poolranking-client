@@ -4,7 +4,6 @@ import MatchList from "../components/MatchList/MatchList";
 import { Match } from "../models/match";
 
 import ApiService from "../apiMockService";
-const api = new ApiService();
 
 export interface StateProps
 {
@@ -28,7 +27,7 @@ function mapDispatchToProps(dispatch: any): DispatchProps
     return {
         addMatch: async (winnerId: string, loserId: string) =>
         {
-            let match = await api.createMatch(winnerId, loserId);
+            let match = await ApiService.createMatch(winnerId, loserId);
 
             if (match) {
                 // only update state if match is returned

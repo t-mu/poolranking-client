@@ -6,15 +6,13 @@ let { Link } = reactRouter;
 // component imports
 import "./PlayerList.css";
 import Player from "../Player/Player";
-import { StateProps, DispatchProps } from "../../containers/PlayerListContainer";
+import { StateProps } from "../../containers/PlayerListContainer";
 
 import { PlayerModel } from "../../models/player";
 
-export class PlayerList extends React.Component<StateProps & DispatchProps>
+export class PlayerList extends React.Component<StateProps>
 {
-    public loading = true;
-
-    constructor(props: StateProps & DispatchProps)
+    constructor(props: StateProps)
     {
         super(props);
     }

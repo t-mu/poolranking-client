@@ -4,8 +4,6 @@ import AddPlayer from "../components/AddPlayer/AddPlayer";
 import { PlayerModel } from "../models/player";
 import ApiService from "../apiMockService";
 
-const api = new ApiService();
-
 export interface StateProps
 {
     players: PlayerModel[];
@@ -30,7 +28,7 @@ function mapDispatchToProps(dispatch: any): DispatchProps
     return {
         createPlayer: async (username: string) =>
         {
-            const player: PlayerModel = await api.createPlayer(username);
+            const player: PlayerModel = await ApiService.createPlayer(username);
 
             if (player)
             {

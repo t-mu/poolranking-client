@@ -37,18 +37,25 @@ export default class ApiService
     private static latestPlayerId: number = 4;
     private static latestMatchId: number = 5;
 
-    public async getScoreboard(): Promise<ScoreboardPlayer[]>
+    public static async getScoreboard(): Promise<ScoreboardPlayer[]>
     {
         return mockScoreboardPlayers;
     }
 
-    public async createPlayer(name: string): Promise<PlayerModel>
+    public static async createPlayer(name: string): Promise<PlayerModel>
     {
         let nextPlayerId = ApiService.latestPlayerId++;
-        return { id: nextPlayerId.toString(), name: name, rating: 1500 };
+        let newPlayer = {
+            id: nextPlayerId.toString(),
+            name: name,
+            rating: 1500
+        };
+        mockPlayers.push(newPlayer);
+
+        return newPlayer;
     }
 
-    public async getPlayer(id: string): Promise<PlayerModel | null>
+    public static async getPlayer(id: string): Promise<PlayerModel>
     {
         for (let player of mockPlayers)
         {
@@ -61,18 +68,30 @@ export default class ApiService
         return null;
     }
 
-    public async getPlayers(): Promise<PlayerModel[]>
+    public static async getPlayers(): Promise<PlayerModel[]>
     {
         return mockPlayers;
     }
 
-    public async createMatch(winnerId: string, loserId: string): Promise<Match>
+    public static async createMatch(winnerId: string, loserId: string): Promise<Match>
     {
+        let winner: PlayerModel = await this.getPlayer(winnerId);
+        let loser: PlayerModel =  await this.getPlayer(loserId);
         let nextMatchId = ApiService.latestMatchId++;
-        return { id: nextMatchId.toString(), winnerId: "p1", winner: "player1", loserId: "p2", loser: "player2" };
+
+        let newMatch = {
+            id: nextMatchId.toString(),
+            winnerId: winner.id,
+            winner: winner.name,
+            loserId: loser.id,
+            loser: loser.name
+        };
+        mockMatches.push(newMatch);
+
+        return newMatch;
     }
 
-    public async getMatch(id: string): Promise<Match | null>
+    public static async getMatch(id: string): Promise<Match | null>
     {
         for (let match of mockMatches)
         {
@@ -85,10 +104,9 @@ export default class ApiService
         return null;
     }
 
-    public async getMatches(): Promise<Match[]>
+    public static async getMatches(): Promise<Match[]>
     {
         return mockMatches;
     }
 
 }
-

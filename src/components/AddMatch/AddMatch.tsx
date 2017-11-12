@@ -6,21 +6,15 @@ let { withRouter} = reactRouter;
 import { PlayerModel } from "../../models/player";
 import { StateProps, DispatchProps } from "../../containers/AddMatchContainer";
 
-class AddMatch extends React.Component<StateProps & DispatchProps> {
-
+class AddMatch extends React.Component<StateProps & DispatchProps>
+{
     public players: PlayerModel[];
-    public loading: boolean = true;
     public winnerId: string;
     public loserId: string;
 
     constructor(props: StateProps & DispatchProps)
     {
         super(props);
-    }
-
-    public componentDidMount()
-    {
-        this.loading = false;
     }
 
     public async addMatch(): Promise<void>
@@ -44,8 +38,6 @@ class AddMatch extends React.Component<StateProps & DispatchProps> {
         return (
             <div className="AddMatch">
                 <h1>Add a Match</h1>
-
-                {this.loading ? <div>Loading...</div> :
 
                 <div className="match-container">
                     <div className="columns">
@@ -73,7 +65,7 @@ class AddMatch extends React.Component<StateProps & DispatchProps> {
                             </select>
                         </div>
                     </div>
-                </div>}
+                </div>
 
             </div>
         );
