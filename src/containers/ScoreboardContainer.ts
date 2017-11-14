@@ -3,8 +3,6 @@ import { fetchScoreboard } from "../actions/scoreboardActions";
 import Scoreboard from "../components/Scoreboard/Scoreboard";
 import { ScoreboardPlayer } from "../models/scoreboardPlayer";
 
-import ApiService from "../apiMockService";
-
 export interface StateProps
 {
     scoreboard: ScoreboardPlayer[];
@@ -25,10 +23,9 @@ function mapStateToProps(state: any): StateProps
 function mapDispatchToProps(dispatch: any): DispatchProps
 {
     return {
-        fetchScoreboard: async () =>
+        fetchScoreboard: () =>
         {
-            const scoreboard = await ApiService.getScoreboard();
-            dispatch(fetchScoreboard(scoreboard));
+            dispatch(fetchScoreboard);
         }
     };
 }

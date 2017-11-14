@@ -3,8 +3,6 @@ import { addMatch } from "../actions/matchesActions";
 import AddMatch from "../components/AddMatch/AddMatch";
 import { PlayerModel } from "../models/player";
 
-import ApiService from "../apiMockService";
-
 export interface StateProps
 {
     players: PlayerModel[];
@@ -27,14 +25,9 @@ function mapStateToProps(state: any): StateProps
 function mapDispatchToProps(dispatch: any): DispatchProps
 {
     return {
-        addMatch: async (winnerId: string, loserId: string) =>
+        addMatch: (winnerId: string, loserId: string) =>
         {
-            let match = await ApiService.createMatch(winnerId, loserId);
-
-            if (match) {
-                // only update state if match is returned
-                dispatch(addMatch(match));
-            }
+            dispatch(addMatch(winnerId, loserId));
         }
     };
 }

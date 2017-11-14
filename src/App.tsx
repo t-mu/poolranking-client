@@ -19,23 +19,24 @@ import MatchListContainer from "./containers/MatchListContainer";
 import Navigation from "./components/Navigation/Navigation";
 import { PlayerActionType } from "./actions/playersActions";
 import { MatchActionType } from "./actions/matchesActions";
-import { ScoreboardActionType } from "./actions/scoreboardActions";
+// import { ScoreboardActionType } from "./actions/scoreboardActions";
 import "./App.css";
 
 // redux setup
 import reducers from "./reducers";
 const history = createHistory();
-const middleware = routerMiddleware(ReduxThunk, history);
-const store = createStore(reducers, applyMiddleware(middleware));
+const middleware = routerMiddleware(history);
+const store = createStore(reducers, applyMiddleware(ReduxThunk, middleware));
 
 import ApiService from "./apiMockService";
+// import { fetchScoreboard } from "./actions/scoreboardActions";
 
 export default class App extends React.Component {
 
     public async componentWillMount()
     {
-        let scoreboard = await ApiService.getScoreboard();
-        store.dispatch({ type: ScoreboardActionType.Fetch, payload: scoreboard });
+        // let scoreboard = await ApiService.getScoreboard();
+        // store.dispatch(fetchScoreboard());
 
         let players = await ApiService.getPlayers();
         store.dispatch({ type: PlayerActionType.Fetch, payload: players });

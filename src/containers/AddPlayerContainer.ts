@@ -2,7 +2,6 @@ import { connect } from "react-redux";
 import { createPlayer } from "../actions/playersActions";
 import AddPlayer from "../components/AddPlayer/AddPlayer";
 import { PlayerModel } from "../models/player";
-import ApiService from "../apiMockService";
 
 export interface StateProps
 {
@@ -26,15 +25,9 @@ function mapStateToProps(state: any): StateProps
 function mapDispatchToProps(dispatch: any): DispatchProps
 {
     return {
-        createPlayer: async (username: string) =>
+        createPlayer: (username: string) =>
         {
-            const player: PlayerModel = await ApiService.createPlayer(username);
-
-            if (player)
-            {
-                // update state if player is returned
-                dispatch(createPlayer(player));
-            }
+            dispatch(createPlayer(username));
         }
     };
 }
