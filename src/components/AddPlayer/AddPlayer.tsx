@@ -6,7 +6,6 @@ let { withRouter } = reactRouter;
 import { PlayerModel } from "../../models/player";
 import { StateProps, DispatchProps } from "../../containers/AddPlayerContainer";
 
-// component imports
 import "./AddPlayer.css";
 
 class AddPlayer extends React.Component<StateProps & DispatchProps> {

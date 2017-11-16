@@ -2,15 +2,19 @@ import * as React from "react";
 const reactRouter = require("react-router-dom");
 let { Link } = reactRouter;
 
-import "./MatchList.css";
 import Match from "../Match/Match";
-import { StateProps, DispatchProps } from "../../containers/MatchListContainer";
-
 import * as MatchModel from "../../models/match";
 
-class MatchList extends React.Component<StateProps & DispatchProps>
+import "./MatchList.css";
+
+interface Props
 {
-    constructor(props: StateProps & DispatchProps)
+    matches: MatchModel.Match[];
+}
+
+class MatchList extends React.Component<Props>
+{
+    constructor(props: Props)
     {
         super(props);
     }

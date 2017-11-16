@@ -25,7 +25,7 @@ function mapDispatchToProps(dispatch: any): DispatchProps
     return {
         fetchScoreboard: () =>
         {
-            dispatch(fetchScoreboard);
+            dispatch(fetchScoreboard());
         }
     };
 }

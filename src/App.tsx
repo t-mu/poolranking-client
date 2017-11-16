@@ -1,70 +1,90 @@
 // vendor imports
 import * as React from "react";
+import { connect } from "react-redux";
 const reactRouter = require("react-router-dom");
 let { Route } = reactRouter;
-import { createStore, applyMiddleware } from "redux";
-import { Provider } from "react-redux";
-const createHistory = require("history").createBrowserHistory;
-const rdx = require("react-router-redux");
-let { ConnectedRouter, routerMiddleware } = rdx;
-import ReduxThunk from "redux-thunk";
 
 // client imports
 import ScoreboardContainer from "./containers/ScoreboardContainer";
 import AddPlayerContainer from "./containers/AddPlayerContainer";
 import AddMatchContainer from "./containers/AddMatchContainer";
-import PlayerListContainer from "./containers/PlayerListContainer";
-import MatchListContainer from "./containers/MatchListContainer";
 
+import MatchList from "./components/MatchList/MatchList";
+import PlayerList from "./components/PlayerList/PlayerList";
 import Navigation from "./components/Navigation/Navigation";
-import { PlayerActionType } from "./actions/playersActions";
-import { MatchActionType } from "./actions/matchesActions";
-// import { ScoreboardActionType } from "./actions/scoreboardActions";
+
+import { fetchScoreboard } from "./actions/scoreboardActions";
+import { fetchMatches } from "./actions/matchesActions";
+import { fetchPlayers } from "./actions/playersActions";
+
+import { ScoreboardPlayer } from "./models/scoreboardPlayer";
+import { Match } from "./models/match";
+import { PlayerModel } from "./models/player";
+
 import "./App.css";
 
-// redux setup
-import reducers from "./reducers";
-const history = createHistory();
-const middleware = routerMiddleware(history);
-const store = createStore(reducers, applyMiddleware(ReduxThunk, middleware));
+interface StateProps
+{
+    scoreboard: ScoreboardPlayer[];
+    matches: Match[];
+    players: PlayerModel[];
+    router: any;
+}
 
-import ApiService from "./apiMockService";
-// import { fetchScoreboard } from "./actions/scoreboardActions";
+interface DispatchProps
+{
+    initialize: Function;
+}
 
-export default class App extends React.Component {
+export class App extends React.Component<StateProps & DispatchProps> {
 
-    public async componentWillMount()
+    constructor(props: StateProps & DispatchProps)
     {
-        // let scoreboard = await ApiService.getScoreboard();
-        // store.dispatch(fetchScoreboard());
-
-        let players = await ApiService.getPlayers();
-        store.dispatch({ type: PlayerActionType.Fetch, payload: players });
-
-        let matches = await ApiService.getMatches();
-        store.dispatch({ type: MatchActionType.Fetch, payload: matches });
+        super(props);
     }
 
-    render() {
+    public componentDidMount(): void
+    {
+        this.props.initialize();
+    }
 
+    render()
+    {
         return (
-            <Provider store={store}>
-                <ConnectedRouter history={history}>
-
-                    <div className="App">
-                    <header>
-                        <h1>Pool ranking</h1>
-                        <Navigation />
-                    </header>
-                        <Route exact path="/" render={(props: any) => <ScoreboardContainer {...props} />} />
-                        <Route exact path="/matches" render={(props: any) => <MatchListContainer {...props} />} />
-                        <Route exact path="/matches/new" render={(props: any) => <AddMatchContainer {...props} />} />
-                        <Route exact path="/players" render={(props: any) => <PlayerListContainer {...props} />} />
-                        <Route exact path="/players/new" render={(props: any) => <AddPlayerContainer {...props} />} />
-                    </div>
-
-                </ConnectedRouter>
-            </Provider>
+            <div className="App">
+            <header>
+                <h1>Pool ranking</h1>
+                <Navigation />
+            </header>
+                <Route exact path="/"               render={(props: any) => <ScoreboardContainer {...props} />} />
+                <Route exact path="/matches"        render={(props: any) => <MatchList matches={this.props.matches} />} />
+                <Route exact path="/matches/new"    render={(props: any) => <AddMatchContainer {...props} />} />
+                <Route exact path="/players"        render={(props: any) => <PlayerList players={this.props.players} />} />
+                <Route exact path="/players/new"    render={(props: any) => <AddPlayerContainer {...props} />} />
+            </div>
         );
     }
 }
+
+function mapStateToProps(state: any): StateProps
+{
+    return {
+        scoreboard: state.scoreboard,
+        matches: state.matches,
+        players: state.players,
+        router: state.router
+    };
+}
+
+function mapDispatchToProps(dispatch: any): DispatchProps
+{
+    return {
+        initialize: () => {
+            dispatch(fetchScoreboard());
+            dispatch(fetchMatches());
+            dispatch(fetchPlayers());
+        }
+    };
+}
+
+export default connect<StateProps, DispatchProps>(mapStateToProps, mapDispatchToProps)(App);
