@@ -1,24 +1,22 @@
 // vendor imports
-import * as React from 'react';
-const reactRouter = require('react-router-dom');
+import * as React from "react";
+const reactRouter = require("react-router-dom");
 let { withRouter } = reactRouter;
-// import ApiService from '../../apiService';
-import { PlayerModel } from '../../models/player';
 
-// component imports
-import './AddPlayer.css';
+import { PlayerModel } from "../../models/player";
+import { StateProps, DispatchProps } from "../../containers/AddPlayerContainer";
 
+import "./AddPlayer.css";
 
-interface Props
-{
-    createPlayer: (username: string) => Promise<any>;
-    history: any;
-}
-
-class AddPlayer extends React.Component<Props> {
+class AddPlayer extends React.Component<StateProps & DispatchProps> {
 
     public players: PlayerModel[] = [];
-    public userName = "";
+    public userName: string = "";
+
+    constructor(props: StateProps & DispatchProps)
+    {
+        super(props);
+    }
 
     public async createPlayer()
     {
@@ -37,7 +35,8 @@ class AddPlayer extends React.Component<Props> {
     render() {
         return (
             <div className="AddPlayer">
-                New player name: <input onChange={this.updateUsername.bind(this)} />
+                <label htmlFor="username">Username:</label>
+                <input name="username" onChange={this.updateUsername.bind(this)} />
                 <button onClick={this.createPlayer.bind(this)}>Create player</button>
             </div>
         );

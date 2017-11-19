@@ -1,6 +1,6 @@
-import { ReducerAction } from "./actions";
 import { PlayerModel } from "../models/player";
 
+import ApiService from "../apiMockService";
 
 export const enum PlayerActionType {
     Create = "CREATE_PLAYER",
@@ -8,20 +8,21 @@ export const enum PlayerActionType {
     Fetch = "FETCH_PLAYERS"
 }
 
-export const createPlayer = (name: string): ReducerAction<PlayerActionType, any> =>
+export const createPlayer = (username: string): Function =>
 {
-    return {
-        type: PlayerActionType.Create,
-        payload: {
-            username: name
-        }
-    }
-}
+    return async function(dispatch: any): Promise<void>
+    {
+        let player: PlayerModel = await ApiService.createPlayer(username);
+        dispatch({ type: PlayerActionType.Create, payload: player });
+    };
 
-export const fetchPlayers = (players: PlayerModel[]): ReducerAction<PlayerActionType, PlayerModel[]> =>
+};
+
+export const fetchPlayers = (): Function =>
 {
-    return {
-        type: PlayerActionType.Fetch,
-        payload: players
-    }
-}
+    return async function(dispatch: any): Promise<void>
+    {
+        let players: PlayerModel[] = await ApiService.getPlayers();
+        dispatch({ type: PlayerActionType.Fetch, payload: players });
+    };
+};

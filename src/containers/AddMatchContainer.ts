@@ -1,23 +1,37 @@
 import { connect } from "react-redux";
 import { addMatch } from "../actions/matchesActions";
 import AddMatch from "../components/AddMatch/AddMatch";
+import { PlayerModel } from "../models/player";
 
-function mapStateToProps(state: any)
+export interface StateProps
 {
-    return {
-        matches: state.matches
-    }
+    players: PlayerModel[];
+    history: any;
 }
 
-function mapDispatchToProps(dispatch: Function)
+export interface DispatchProps
+{
+    addMatch: Function;
+}
+
+function mapStateToProps(state: any): StateProps
 {
     return {
-        addMatch: (match: any) => {
-            dispatch(addMatch(match))
+        players: state.players,
+        history: state.history
+    };
+}
+
+function mapDispatchToProps(dispatch: any): DispatchProps
+{
+    return {
+        addMatch: (winnerId: string, loserId: string) =>
+        {
+            dispatch(addMatch(winnerId, loserId));
         }
-    }
+    };
 }
 
-const AddMatchContainer = connect<any, any>(mapStateToProps, mapDispatchToProps)(AddMatch);
+const AddMatchContainer = connect<StateProps, DispatchProps>(mapStateToProps, mapDispatchToProps)(AddMatch);
 
 export default AddMatchContainer;

@@ -1,33 +1,37 @@
 import { connect } from "react-redux";
 import { createPlayer } from "../actions/playersActions";
 import AddPlayer from "../components/AddPlayer/AddPlayer";
-import ApiService from "../apiService";
+import { PlayerModel } from "../models/player";
 
-
-function mapStateToProps(state: any)
+export interface StateProps
 {
-    return {
-        players: state.players
-    }
+    players: PlayerModel[];
+    history: any;
 }
 
-function mapDispatchToProps(dispatch: Function)
+export interface DispatchProps
+{
+    createPlayer: Function;
+}
+
+function mapStateToProps(state: any): StateProps
 {
     return {
-        createPlayer: async (username: string) =>
+        players: state.players,
+        history: state.history
+    };
+}
+
+function mapDispatchToProps(dispatch: any): DispatchProps
+{
+    return {
+        createPlayer: (username: string) =>
         {
-            let api = new ApiService();
-            const player = await api.createPlayer(username);
-
-            if (player)
-            {
-                // update state if success
-                dispatch(createPlayer(username));
-            }
+            dispatch(createPlayer(username));
         }
-    }
+    };
 }
 
-const AddPlayerContainer = connect<any, any>(mapStateToProps, mapDispatchToProps)(AddPlayer);
+const AddPlayerContainer = connect<StateProps, DispatchProps>(mapStateToProps, mapDispatchToProps)(AddPlayer);
 
 export default AddPlayerContainer;

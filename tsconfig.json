@@ -13,7 +13,7 @@
     "noImplicitReturns": true,
     "noImplicitThis": true,
     "noImplicitAny": true,
-    "strictNullChecks": true,
+    "strictNullChecks": false, // enable type 'null' to be assignable to other types
     "suppressImplicitAnyIndexErrors": true,
     "noUnusedLocals": true
   },
