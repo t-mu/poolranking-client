@@ -26,42 +26,41 @@ class Scoreboard extends React.Component<StateProps & DispatchProps> {
 
         return (
             <div className="Scoreboard">
-                {this.loading ? <p>loading</p> :
-                    <table className="table container is-bordered is-striped">
-                        <thead>
-                            <tr>
-                                <th>Score</th>
-                                <th>Name</th>
-                                <th>Wins</th>
-                                <th>Loses</th>
-                                <th>Ratio</th>
-                            </tr>
-                        </thead>
-                        <tfoot>
-                            <tr>
-                                <th>Score</th>
-                                <th>Name</th>
-                                <th>Wins</th>
-                                <th>Loses</th>
-                                <th>Ratio</th>
-                            </tr>
-                        </tfoot>
-                        <tbody>
-                        {scoreboard.map((score) => {
-                            return (
-                                <tr key={score.player.id}>
-                                    <th>{score.player.rating}</th>
-                                    <th>{score.player.name}</th>
-                                    <th>{score.wins}</th>
-                                    <th>{score.losses}</th>
-                                    <th>{parseInt(score.wins, 10) / parseInt(score.losses, 10)}</th>
-                                </tr>
-                            );
-                        })}
-                        </tbody>
-                    </table>}
+                <div className="columns is-mobile Scoreboard__row Scoreboard__row--header">
+                    <span className="column Scoreboard__cell">Rating</span>
+                    <span className="column Scoreboard__cell">Player</span>
+                    <span className="column Scoreboard__cell">Wins</span>
+                    <span className="column Scoreboard__cell">Losses</span>
+                    <span className="column Scoreboard__cell">W/L</span>
+                </div>
+                {this.props.scoreboard.map((score, index) =>
+                    {
+                        return (
+                            <div className="columns is-mobile Scoreboard__row Scoreboard__row--body" key={index}>
+                                <span className="column Scoreboard__cell">{score.player.rating}</span>
+                                <span className="column Scoreboard__cell">{score.player.name}</span>
+                                <span className="column Scoreboard__cell">{score.wins}</span>
+                                <span className="column Scoreboard__cell">{score.losses}</span>
+                                <span className="column Scoreboard__cell">{this.calculateWinLoseRatio(score.wins, score.losses)}</span>
+                            </div>
+                        );
+                    }
+                )}
             </div>
         );
+    }
+
+    private calculateWinLoseRatio(wins: string, losses: string): string
+    {
+        if (losses === "0")
+        {
+            return parseInt(wins, 10).toString();
+        }
+        else
+        {
+            let ratio: number = parseInt(wins, 10) / parseInt(losses, 10);
+            return ratio.toFixed(2);
+        }
     }
 }
 

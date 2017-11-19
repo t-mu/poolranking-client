@@ -1,8 +1,6 @@
 .App {
     height: 100%;
 
-    text-align: center;
-
     &:before {
         content: "";
         display: block;
@@ -17,11 +15,11 @@
         background-size: cover;
         z-index: -1;
 
-        filter: blur(4px);
+        filter: blur(6px);
+        transform: scale(1.05); // scale out blurred edges
     }
 
   header {
-    padding: 20px;
     color: white;
 
     h1 {

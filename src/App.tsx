@@ -11,7 +11,7 @@ import AddMatchContainer from "./containers/AddMatchContainer";
 
 import MatchList from "./components/MatchList/MatchList";
 import PlayerList from "./components/PlayerList/PlayerList";
-import Navigation from "./components/Navigation/Navigation";
+import Header from "./components/Header/Header";
 
 import { fetchScoreboard } from "./actions/scoreboardActions";
 import { fetchMatches } from "./actions/matchesActions";
@@ -52,10 +52,7 @@ export class App extends React.Component<StateProps & DispatchProps> {
     {
         return (
             <div className="App">
-            <header>
-                <h1>Pool ranking</h1>
-                <Navigation />
-            </header>
+                <Header />
                 <Route exact path="/"               render={(props: any) => <ScoreboardContainer {...props} />} />
                 <Route exact path="/matches"        render={(props: any) => <MatchList matches={this.props.matches} />} />
                 <Route exact path="/matches/new"    render={(props: any) => <AddMatchContainer {...props} />} />
