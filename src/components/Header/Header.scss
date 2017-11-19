@@ -10,7 +10,7 @@ header {
         font-size: 1.5em;
         font-weight: 400;
         position: relative;
-        transition: color 150ms ease-in;
+        transition: color 150ms ease-in-out;
 
         &:before,
         &:after {
@@ -21,7 +21,7 @@ header {
             left: 0;
             background-color: #fff;
             opacity: 0;
-            transition: opacity 150ms ease-in, transform 150ms ease-in;
+            transition: opacity 150ms ease-in-out, transform 150ms ease-in-out;
         }
 
         &:before {

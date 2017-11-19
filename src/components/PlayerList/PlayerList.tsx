@@ -30,7 +30,7 @@ export class PlayerList extends React.Component<Props>
                     {this.props.players.map((player: PlayerModel, index: number) => <Player key={index} username={player.name} />)}
                     <Link
                         to="players/new"
-                        className="navigation__link column"
+                        className="column"
                     >
                         <button>New player</button>
                     </Link>

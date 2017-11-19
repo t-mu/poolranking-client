@@ -38,7 +38,7 @@ class MatchList extends React.Component<Props>
 
                 <Link
                     to="matches/new"
-                    className="navigation__link column"
+                    className="column"
                 >
                     <button>New match</button>
                 </Link>
