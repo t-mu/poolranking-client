@@ -26,16 +26,13 @@ const mockScoreboardPlayers: ScoreboardPlayer[] = [
 ];
 
 const mockMatches: Match[] = [
-    { id: "1", winnerId: "1", winner: "player1", loserId: "2", loser: "player2" },
-    { id: "2", winnerId: "1", winner: "player1", loserId: "2", loser: "player2" },
-    { id: "3", winnerId: "2", winner: "player2", loserId: "3", loser: "player3" },
-    { id: "4", winnerId: "2", winner: "player2", loserId: "3", loser: "player3" },
+    { id: "1", winnerId: "1", winner: "player1", loserId: "2", loser: "player2" }
 ];
 
 export default class ApiService
 {
     private static latestPlayerId: number = 4;
-    private static latestMatchId: number = 5;
+    private static latestMatchId: number = 1;
 
     public static async getScoreboard(): Promise<ScoreboardPlayer[]>
     {
@@ -50,7 +47,7 @@ export default class ApiService
             name: name,
             rating: 1500
         };
-        mockPlayers.push(newPlayer);
+       // mockPlayers.push(newPlayer);
 
         return newPlayer;
     }
@@ -79,14 +76,14 @@ export default class ApiService
         let loser: PlayerModel =  await this.getPlayer(loserId);
         let nextMatchId = ApiService.latestMatchId++;
 
-        let newMatch = {
+        const newMatch = {
             id: nextMatchId.toString(),
             winnerId: winner.id,
             winner: winner.name,
             loserId: loser.id,
             loser: loser.name
         };
-        mockMatches.push(newMatch);
+        // mockMatches.push(newMatch);
 
         return newMatch;
     }

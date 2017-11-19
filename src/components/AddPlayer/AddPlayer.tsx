@@ -11,7 +11,7 @@ import "./AddPlayer.css";
 class AddPlayer extends React.Component<StateProps & DispatchProps> {
 
     public players: PlayerModel[] = [];
-    public userName = "";
+    public userName: string = "";
 
     constructor(props: StateProps & DispatchProps)
     {

@@ -19,8 +19,11 @@ class AddMatch extends React.Component<StateProps & DispatchProps>
 
     public async addMatch(): Promise<void>
     {
-        this.props.addMatch(this.winnerId, this.loserId);
-        this.props.history.push("/matches");
+        if (this.winnerId && this.loserId)
+        {
+            this.props.addMatch(this.winnerId, this.loserId);
+            this.props.history.push("/matches");
+        }
     }
 
     public updateMatchWinner(e: any)
@@ -35,6 +38,9 @@ class AddMatch extends React.Component<StateProps & DispatchProps>
 
     render() {
 
+        const selectablePlayers = this.props.players.map(player =>
+            <option key={player.id} value={player.id}>{player.name}</option>);
+
         return (
             <div className="AddMatch">
                 <h1>Add a Match</h1>
@@ -48,8 +54,7 @@ class AddMatch extends React.Component<StateProps & DispatchProps>
                                 onChange={this.updateMatchWinner.bind(this)}
                                 value={this.winnerId}
                             >
-                                {this.props.players.map(player =>
-                                    <option key={player.id} value={player.id}>{player.name}</option>)}
+                                {selectablePlayers}
                             </select>
                         </div>
                         <button onClick={this.addMatch.bind(this)}>ADD MATCH!</button>
@@ -60,8 +65,7 @@ class AddMatch extends React.Component<StateProps & DispatchProps>
                                 onChange={this.updateMatchLoser.bind(this)}
                                 value={this.loserId}
                             >
-                                {this.props.players.map(player =>
-                                    <option key={player.id} value={player.id}>{player.name}</option>)}
+                                {selectablePlayers}
                             </select>
                         </div>
                     </div>
