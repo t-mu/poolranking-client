@@ -2,7 +2,7 @@ import * as React from "react";
 
 import { ScoreboardPlayer } from "../../models/scoreboardPlayer";
 import { StateProps, DispatchProps } from "../../containers/ScoreboardContainer";
-import ScoreboardRow from "../ScoreboardRow/ScoreboardRow";
+import ScoreboardRow from "./ScoreboardRow/ScoreboardRow";
 
 import "./Scoreboard.css";
 
@@ -25,16 +25,18 @@ class Scoreboard extends React.Component<StateProps & DispatchProps> {
         }
 
         return (
-            <div className="Scoreboard">
-                <div className="columns is-mobile Scoreboard__row Scoreboard__row--header">
-                    <span className="column Scoreboard__cell">Rating</span>
-                    <span className="column Scoreboard__cell">Player</span>
-                    <span className="column Scoreboard__cell">Wins</span>
-                    <span className="column Scoreboard__cell">Losses</span>
-                    <span className="column Scoreboard__cell">W/L</span>
+            <section className="Scoreboard datatable">
+                <div className="datatable__row datatable__row--header columns is-mobile">
+                    <span className="datatable__cell column">Rating</span>
+                    <span className="datatable__cell column">Player</span>
+                    <span className="datatable__cell column">Wins</span>
+                    <span className="datatable__cell column">Losses</span>
+                    <span className="datatable__cell column">W/L</span>
                 </div>
-                {this.props.scoreboard.map((score, index) =>  <ScoreboardRow score={score} key={index} /> )}
-            </div>
+                {this.props.scoreboard.map((score: ScoreboardPlayer, index: number) =>
+                    <ScoreboardRow score={score} key={index} /> )
+                }
+            </section>
         );
     }
 }

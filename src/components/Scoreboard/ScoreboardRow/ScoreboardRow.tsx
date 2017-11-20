@@ -1,7 +1,7 @@
 import * as React from "react";
 import "./ScoreboardRow.css";
 
-import { ScoreboardPlayer } from "../../models/scoreboardPlayer";
+import { ScoreboardPlayer } from "../../../models/scoreboardPlayer";
 
 interface Props
 {
@@ -21,12 +21,12 @@ class ScoreboardRow extends React.Component<Props>
         const score = this.props.score;
 
         return (
-            <div className="columns is-mobile Scoreboard__row Scoreboard__row--body">
-                <span className="column Scoreboard__cell">{score.player.rating}</span>
-                <span className="column Scoreboard__cell">{score.player.name}</span>
-                <span className="column Scoreboard__cell">{score.wins}</span>
-                <span className="column Scoreboard__cell">{score.losses}</span>
-                <span className="column Scoreboard__cell">{this.calculateWinLoseRatio(score.wins, score.losses)}</span>
+            <div className="ScoreboardRow datatable__row datatable__row--body columns is-mobile ">
+                <span className="datatable__cell column">{score.player.rating}</span>
+                <span className="datatable__cell column">{score.player.name}</span>
+                <span className="datatable__cell column">{score.wins}</span>
+                <span className="datatable__cell column">{score.losses}</span>
+                <span className="datatable__cell column">{this.calculateWinLoseRatio(score.wins, score.losses)}</span>
             </div>
         );
     }
