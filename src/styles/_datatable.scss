@@ -1,3 +1,5 @@
+@import "./variables";
+
 .datatable {
     margin-top: 0.75em; // compensate header nav negative margin
 
@@ -15,7 +17,7 @@
     }
 
     &__row {
-        background-color: rgba(35, 76, 76, 0.76);
+        background-color: $element-bg-color--basic;
 
         &--header {
             border-bottom: 1px solid #fff;
@@ -27,7 +29,7 @@
     }
 
     &__cell {
-        color: #fff;
+        color: $text-color--primary;
         text-align: center;
     }
 
