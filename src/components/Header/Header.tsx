@@ -14,14 +14,23 @@ class Header extends React.Component<Props> {
                 <h1 className="column level-left">PoolRanking</h1>
                 <nav className="navigation column is-mobile level-right">
                     <div className="columns is-mobile">
-                    <Link to="/"
-                        className="navigation__link column">Scoreboard
+                    <Link
+                        to="/"
+                        className="navigation__link column"
+                    >
+                    Scoreboard
                     </Link>
-                    <Link to="/matches"
-                        className="navigation__link column">Matches
+                    <Link
+                        to="/matches"
+                        className="navigation__link column"
+                    >
+                    Matches
                     </Link>
-                    <Link to="/players"
-                        className="navigation__link column">Players
+                    <Link
+                        to="/players"
+                        className="navigation__link column"
+                    >
+                    Players
                     </Link>
                     </div>
                 </nav>
