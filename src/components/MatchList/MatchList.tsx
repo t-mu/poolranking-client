@@ -2,7 +2,7 @@ import * as React from "react";
 const reactRouter = require("react-router-dom");
 let { Link } = reactRouter;
 
-import Match from "../Match/Match";
+import MatchListRow from "./MatchListRow/MatchListRow";
 import * as MatchModel from "../../models/match";
 
 import "./MatchList.css";
@@ -21,28 +21,28 @@ class MatchList extends React.Component<Props>
 
     public render()
     {
-        const mappedMatches = this.props.matches.map((match: MatchModel.Match, index: number) => <Match key={index} match={match} />);
+        const mappedMatches = this.props.matches.map((match: MatchModel.Match, index: number) =>
+            <MatchListRow key={index} match={match} />);
 
         return (
-            <div className="MatchList">
+            <section className="MatchList">
 
-                {/* matchlist header */}
-                <div className="columns">
-                    <span className="column is-two-fifths">WINNER</span>
-                    <span className="column is-one-fifth"></span>
-                    <span className="column is-two-fifths">LOSER</span>
+                <div className="datatable">
+                    <div className="datatable__row datatable__row--header columns is-mobile">
+                        <span className="datatable__cell column is-two-fifths">Winner</span>
+                        <span className="datatable__cell column is-one-fifth" />
+                        <span className="datatable__cell column is-two-fifths">Loser</span>
+                    </div>
+                    {mappedMatches}
                 </div>
-
-                {/* matches */}
-                {mappedMatches}
 
                 <Link
                     to="matches/new"
                     className="column"
                 >
-                    <button>New match</button>
+                    <button className="button">New match</button>
                 </Link>
-            </div>
+            </section>
         );
     }
 }

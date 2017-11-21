@@ -48,25 +48,29 @@ class AddMatch extends React.Component<StateProps & DispatchProps>
                 <div className="match-container">
                     <div className="columns">
                         <div className="column">
-                            <select
-                                name="winner"
-                                id="winner-selection"
-                                onChange={this.updateMatchWinner.bind(this)}
-                                value={this.winnerId}
-                            >
-                                {selectablePlayers}
-                            </select>
+                            <div className="select">
+                                <select
+                                    name="winner"
+                                    id="winner-selection"
+                                    onChange={this.updateMatchWinner.bind(this)}
+                                    value={this.winnerId}
+                                >
+                                    {selectablePlayers}
+                                </select>
+                            </div>
                         </div>
-                        <button onClick={this.addMatch.bind(this)}>ADD MATCH!</button>
+                        <button className="column button" onClick={this.addMatch.bind(this)}>ADD MATCH!</button>
                         <div className="column">
-                            <select
-                                name="loser"
-                                id="loser-selection"
-                                onChange={this.updateMatchLoser.bind(this)}
-                                value={this.loserId}
-                            >
-                                {selectablePlayers}
-                            </select>
+                            <div className="select">
+                                <select
+                                    name="loser"
+                                    id="loser-selection"
+                                    onChange={this.updateMatchLoser.bind(this)}
+                                    value={this.loserId}
+                                >
+                                    {selectablePlayers}
+                                </select>
+                            </div>
                         </div>
                     </div>
                 </div>

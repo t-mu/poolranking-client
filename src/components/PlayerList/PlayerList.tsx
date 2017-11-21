@@ -5,7 +5,7 @@ let { Link } = reactRouter;
 
 // component imports
 import "./PlayerList.css";
-import Player from "../Player/Player";
+import PlayerListRow from "./PlayerListRow/PlayerListRow";
 
 import { PlayerModel } from "../../models/player";
 
@@ -23,24 +23,29 @@ export class PlayerList extends React.Component<Props>
 
     public render()
     {
-        if (this.props.players)
-        {
-            return (
-                <div className="PlayerList">
-                    {this.props.players.map((player: PlayerModel, index: number) => <Player key={index} username={player.name} />)}
-                    <Link
-                        to="players/new"
-                        className="column"
-                    >
-                        <button>New player</button>
-                    </Link>
+        const mappedPlayers = this.props.players.map((player: PlayerModel, index: number) =>
+            <PlayerListRow key={index} player={player} />);
+
+        return (
+            <section className="PlayerList">
+
+                <div className="datatable">
+                    <div className="datatable__row datatable__row--header columns is-mobile">
+                        <span className="datatable__cell column">Player</span>
+                        <span className="datatable__cell column">Rating</span>
+                    </div>
+                    {mappedPlayers}
                 </div>
-            );
-        }
-        else
-        {
-            return <div>Loading...</div>;
-        }
+
+                <Link
+                    to="players/new"
+                    className=""
+                >
+                    <button className="button">Add</button>
+                </Link>
+
+            </section>
+        );
     }
 }
 
